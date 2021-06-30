@@ -1,7 +1,30 @@
 package br.com.alura
 
 fun main() {
-//vc pode usar comportamentos comuns entre as Collections já que list, set, map estão relacionados
+    testaColecao()
+    val bancoDeNomes = BancoDeNomes()
+    //bancoDeNomes.nomes.add("Alex") dessa forma é errado pois qualquer um pode alterar a coleção
+    bancoDeNomes.salva("Alex")
+    println(bancoDeNomes)
+    println(BancoDeNomes().nomes)
+
+}
+
+//o correto é tornar a coleção privada e fazer um propertie get e torna - la Companion
+class BancoDeNomes {
+    val nomes: Collection<String> get() = dados
+
+    fun salva(nome: String) {
+        Companion.dados.add(nome)
+    }
+
+    companion object {
+        private val dados = mutableListOf<String>()
+    }
+}
+
+private fun testaColecao() {
+    //vc pode usar comportamentos comuns entre as Collections já que list, set, map estão relacionados
     val nomes: MutableList<String> = mutableListOf(
         "Alex",
         "Fran",
@@ -37,5 +60,4 @@ fun main() {
 
     println("Tem o nome Alex? ${nomes.contains("Alex")}")
     println("Tamanho da coleção ${nomes.size}")//aqui nomes3 n vai funcionar, pois é uma Iterable e n compartilha o mesmo comportamento
-
 }
