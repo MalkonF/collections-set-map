@@ -2,20 +2,24 @@ package br.com.alura
 
 fun main() {
 //vc pode usar comportamentos comuns entre as Collections já que list, set, map estão relacionados
-    val nomes: List<String> = listOf(
+    val nomes: MutableList<String> = mutableListOf(
         "Alex",
         "Fran",
         "Gui",
         "Maria",
         "Ana"
     )
-    val nomes2: Collection<String> = listOf(
+
+    nomes.add("Paulo")
+    nomes.remove("Alex")
+    val nomes2: Collection<String> = mutableListOf(
         "Alex",
         "Fran",
         "Gui",
         "Maria",
         "Ana"
     )
+
 
     val nomes3: Iterable<String> = setOf(
         "Alex",
