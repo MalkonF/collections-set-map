@@ -3,22 +3,21 @@ package br.com.alura
 fun main() {
     //testaColecao()
     val bancoDeNomes = BancoDeNomes()
-    // nomesSalvos obtem uma referencia da coleção nomes
-    // e terá comportamento de uma lista. Tudo que fazer nele vai refletir na lista original Shallow copy
-    val nomesSalvos: MutableCollection<String> = bancoDeNomes.nomes as MutableCollection<String>
-    //bancoDeNomes.nomes.add("Alex") dessa forma é errado pois qualquer um pode alterar a coleção
     bancoDeNomes.salva("Alex")
+    val nomesSalvos: Collection<String> =
+        bancoDeNomes.nomes //agora ao inves da referencia vai obter uma copia da lista. Se vc
+    //add um novo elemento na lista original após a copia isso n vai refletir na copia
+    //bancoDeNomes.nomes.add("Alex") dessa forma é errado pois qualquer um pode alterar a coleção
     println(bancoDeNomes)
     println(BancoDeNomes().nomes)
-    nomesSalvos.add("Paulo")
-    println(BancoDeNomes().nomes)
+    println(nomesSalvos)
 
 
 }
 
 //o correto é tornar a coleção privada e fazer um propertie get e torna - la Companion
 class BancoDeNomes {
-    val nomes: Collection<String> get() = dados
+    val nomes: Collection<String> get() = dados.toList()
 
     fun salva(nome: String) {
         Companion.dados.add(nome)
