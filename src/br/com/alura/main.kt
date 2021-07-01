@@ -1,12 +1,18 @@
 package br.com.alura
 
 fun main() {
-    testaColecao()
+    //testaColecao()
     val bancoDeNomes = BancoDeNomes()
+    // nomesSalvos obtem uma referencia da coleção nomes
+    // e terá comportamento de uma lista. Tudo que fazer nele vai refletir na lista original Shallow copy
+    val nomesSalvos: MutableCollection<String> = bancoDeNomes.nomes as MutableCollection<String>
     //bancoDeNomes.nomes.add("Alex") dessa forma é errado pois qualquer um pode alterar a coleção
     bancoDeNomes.salva("Alex")
     println(bancoDeNomes)
     println(BancoDeNomes().nomes)
+    nomesSalvos.add("Paulo")
+    println(BancoDeNomes().nomes)
+
 
 }
 
