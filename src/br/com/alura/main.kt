@@ -2,14 +2,28 @@ package br.com.alura
 
 fun main() {
     val assistiramCursoAndroid: Set<String> = setOf("Alex", "Fran", "Gui", "Maria")
-    val assistiramCursoKotlin: List<String> = listOf("Alex", "Paulo", "Maria")
+    val assistiramCursoKotlin: Set<String> = setOf("Alex", "Paulo", "Maria")
 
-    //val assistiramAmbos = assistiramCursoKotlin + assistiramCursoAndroid //se inverter dá erro na linha 9. Pq
-    // ele retorna o tipo do primeiro arg ou seja o assistiramCursoAndroid que é um set e n da pra fazer
-    //[0] em sets
-    val assistiramAmbos: Set<String> = assistiramCursoAndroid + assistiramCursoKotlin
+    val assistiramAmbos = mutableSetOf<String>()
 
+    assistiramAmbos.addAll(assistiramCursoAndroid)
+    assistiramAmbos.addAll(assistiramCursoKotlin)
+    assistiramAmbos.add("Ana")
+    assistiramAmbos.add("Ana")
     println(assistiramAmbos)
 
-//println(assistiramAmbos[0])// pegando primeiro elemento da lista
+    // faz a mesma coisa linha 16 e 17
+    println(assistiramCursoAndroid + assistiramCursoKotlin)
+    println(assistiramCursoAndroid.union(assistiramCursoKotlin))
+    println(assistiramCursoAndroid union assistiramCursoKotlin) //in fix
+
+    println(assistiramCursoAndroid - assistiramCursoKotlin)
+    println(assistiramCursoAndroid subtract assistiramCursoKotlin)
+    //pega as pessoas que assistiram ambos os cursos
+    println(assistiramCursoAndroid intersect assistiramCursoKotlin)
+
+    val toMutableList = assistiramAmbos.toMutableList()
+    toMutableList.add("Alex")
+    println(toMutableList) //volta a repetir os elementos pois foi transformada para uma lista mutável
+    println(toMutableList.toSet())//volta a retirar os elementos repetidos
 }
