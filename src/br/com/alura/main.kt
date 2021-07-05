@@ -22,11 +22,29 @@ fun main() {
         pedido.valor > 50.0
     }
 
+    //aqui vai trazer somente um pedido true e outro false(sempre o último)
+    val mapa: Map<Boolean, Pedido> = pedidos.associateBy { pedido: Pedido ->
+        pedido.valor > 50.0
+    }
+    //agrupa os pedidos true e false juntos
+    val pedidosFreteGratisAgrupados: Map<Boolean, List<Pedido>> = pedidos.groupBy { pedido: Pedido ->
+        pedido.valor > 50.0
+    }
+
+    val nomes = listOf("Ana", "Maria", "João", "Rafael", "Rogerio")
+    val agenda: Map<Char, List<String>> = nomes.groupBy { nome ->
+        nome.first()
+    }
+
     println(pedidosMapeados)
     println(pedidosMapeados[1])
     println(pedidosMapeadosBy)
     println(pedidosFreteGratis)
-    println(pedidosFreteGratis[Pedido(numero=1, valor=20.0)])
+    println(pedidosFreteGratis[Pedido(numero = 1, valor = 20.0)])
+    println(mapa)
+    println(pedidosFreteGratisAgrupados[true])//pega somente os pedidos true
+    println(agenda)
+    println(agenda['R'])
 }
 
 data class Pedido(val numero: Int, val valor: Double)
