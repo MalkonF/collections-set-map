@@ -2,7 +2,7 @@ package br.com.alura
 
 fun main() {
     val pedidos: MutableMap<Int, Double> = mutableMapOf(
-        Pair(1, 20.0),
+        Pair(1, 64.0),
         Pair(2, 64.0),
         3 to 50.0, // infix tem o mesmo valor que o Pair() só perde na performance
         //4 to null,
@@ -42,6 +42,27 @@ fun main() {
 
     println(pedidosAcima)
     println(pedidosPares)
+
+
+    println(pedidos + Pair(7, 90.0)) // o map original n é alterado, é criado um novo adicionado essa chave 7 e o valor
+    println(pedidos)
+
+    println(pedidos + mapOf(7 to 90.0, 8 to 20.0)) //dessa forma aceita infix
+
+    println(pedidos - 5)// n modifica o map original mas aqui não imprime a chave 5
+    println(pedidos - listOf(6, 1)) //n imprime 1e 6
+
+    pedidos.putAll(setOf<Pair<Int, Double>>(7 to 90.0, 8 to 20.0, 8 to 60.0))//add no map, sobrescreve 8
+    //pedidos += setOf<Pair<Int, Double>>(7 to 90.0, 8 to 20.0, 8 to 60.0)//mesma coisa de acima
+    println(pedidos)
+
+    pedidos.keys.remove(1)//remove chave 1
+    println(pedidos)
+
+    pedidos.values.remove(64.0)//se tiver valores repetidos remove o primeiro que achar
+
+    pedidos -= 6 // remove chave 6
+    println(pedidos)
 }
 
 fun testaMap(pedidos: MutableMap<Int, Double>) {
