@@ -3,9 +3,48 @@ package br.com.alura
 fun main() {
     val pedidos: MutableMap<Int, Double> = mutableMapOf(
         Pair(1, 20.0),
-        Pair(2, 34.0),
-        3 to 50.0 // infix tem o mesmo valor que o Pair() só perde na performance
+        Pair(2, 64.0),
+        3 to 50.0, // infix tem o mesmo valor que o Pair() só perde na performance
+        //4 to null,
+        5 to 150.0,
+        6 to 80.0
     )
+    //val valorPedido = pedidos.getValue(5) // se valor não existir lança uma exception de valor inexistente
+    //println(valorPedido)
+    println(pedidos[0]) //se valor não existir apresenta como null, diferente do getValue
+    println(pedidos.get(0)) // tb dá null se a chave não existir
+
+    println(pedidos.getOrElse(0) { //se o valor n existir ele retorna uma expressão lambda
+        "Não tem o pedido"
+    })
+
+    println(pedidos.getOrDefault(0, -1)) //se n existir a chave, ela vai ter valor de -1
+
+    println(pedidos.keys)
+    println(pedidos.values)
+
+    for (numerosDePedidos in pedidos.keys)//imprime todos numeros de pedidos, chaves
+        println("Pedido $numerosDePedidos")
+
+    val pedidosFiltrados = pedidos.filter { (numero, valor) ->
+        numero % 2 == 0 && valor > 50.0
+    }
+
+    println(pedidosFiltrados)
+
+    val pedidosAcima = pedidos.filterValues { valor ->
+        valor > 50.0
+    }
+
+    val pedidosPares = pedidos.filterKeys { numero ->
+        numero % 2 == 0
+    }
+
+    println(pedidosAcima)
+    println(pedidosPares)
+}
+
+fun testaMap(pedidos: MutableMap<Int, Double>) {
     println(pedidos)
     val pedido: Double? = pedidos[1]
     pedido?.let {
@@ -32,7 +71,6 @@ fun main() {
     println(pedidos)
 
     pedidos.remove(3, 100.0) // só remove se na chave 3 o valor for 100.0
-
 }
 
 
